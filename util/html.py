@@ -1,6 +1,7 @@
-import dominate
-from dominate.tags import *
 import os
+
+import dominate
+from dominate.tags import a, br, h3, img, meta, p, table, td, tr
 
 
 class HTML:

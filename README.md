@@ -24,15 +24,15 @@ Download [The LIP Dataset]( https://drive.google.com/open?id=1SlvucF37ApWCQjmdCY
 The folder is structured as follows:
 ```
 ├── MMAN/
-│   ├── data/                 	/* Files for data processing  		*/
-│   ├── model/                 	/* Files for model    			*/
-│   ├── options/          	/* Files for options    		*/
-│   ├── ...			/* Other dirs & files 			*/
-└── Human/
-    ├── train_LIP_A/		/* Training set: RGB images		*/
-    ├── train_LIP_B/		/* Training set: GT labels		*/
-    ├── test_LIP_A/		/* Testing set: RGB images		*/
-    └── test_LIP_B/		/* Testing set: GT labels		*/
+    ├── data/                 	/* Files for data processing  	*/
+    ├── model/                 	/* Files for model    			*/
+    ├── options/          	    /* Files for options    		*/
+    ├── ...			            /* Other dirs & files 			*/
+    |── Human/
+    	├── train_LIP_A/		/* Training set: RGB images		*/
+    	├── train_LIP_B/		/* Training set: GT labels		*/
+    	├── test_LIP_A/		    /* Testing set: RGB images		*/
+    	└── test_LIP_B/		    /* Testing set: GT labels		*/
 ```
 
 
@@ -44,7 +44,7 @@ python -m visdom.server
 
 ### Train a model
 ```bash
-python train.py --dataroot ../Human --dataset LIP --name Exp_0 --output_nc 20 --gpu_ids 0 --pre_trained --loadSize 286 --fineSize 256
+python train.py --dataroot Human --dataset LIP --name Exp_0 --output_nc 20 --gpu_ids 0 --pre_trained --loadSize 286 --fineSize 256
 ```
 `--dataroot` The root of the training set.
 

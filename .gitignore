@@ -4,6 +4,7 @@ checkpoints/
 results/
 build/
 dist/
+Human/
 *.png
 torch.egg-info/
 */**/__pycache__

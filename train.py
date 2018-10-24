@@ -1,7 +1,8 @@
 import time
-from options.train_options import TrainOptions
+
 from data.data_loader import CreateDataLoader
 from models.models import create_model
+from options.train_options import TrainOptions
 from util.visualizer import Visualizer
 
 opt = TrainOptions().parse()
@@ -17,7 +18,7 @@ total_steps = 0
 for epoch in range(opt.epoch_count, opt.niter + opt.niter_decay + 1):
     epoch_start_time = time.time()
     epoch_iter = 0
-    
+
     for i, data in enumerate(dataset):
         iter_start_time = time.time()
         visualizer.reset()

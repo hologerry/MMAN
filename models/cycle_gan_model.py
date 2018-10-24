@@ -1,14 +1,14 @@
-import numpy as np
-import torch
-import os
-from collections import OrderedDict
-from torch.autograd import Variable
 import itertools
+from collections import OrderedDict
+
+import torch
+from torch.autograd import Variable
+
 import util.util as util
 from util.image_pool import ImagePool
-from .base_model import BaseModel
+
 from . import networks
-import sys
+from .base_model import BaseModel
 
 
 class CycleGANModel(BaseModel):
@@ -28,9 +28,11 @@ class CycleGANModel(BaseModel):
         # Code (paper): G_A (G), G_B (F), D_A (D_Y), D_B (D_X)
 
         self.netG_A = networks.define_G(opt.input_nc, opt.output_nc,
-                                        opt.ngf, opt.which_model_netG, opt.norm, not opt.no_dropout, opt.init_type, self.gpu_ids)
+                                        opt.ngf, opt.which_model_netG, opt.norm, not opt.no_dropout,
+                                        opt.init_type, self.gpu_ids)
         self.netG_B = networks.define_G(opt.output_nc, opt.input_nc,
-                                        opt.ngf, opt.which_model_netG, opt.norm, not opt.no_dropout, opt.init_type, self.gpu_ids)
+                                        opt.ngf, opt.which_model_netG, opt.norm, not opt.no_dropout,
+                                        opt.init_type, self.gpu_ids)
 
         if self.isTrain:
             use_sigmoid = opt.no_lsgan

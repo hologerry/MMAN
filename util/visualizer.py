@@ -1,9 +1,10 @@
-import numpy as np
-import os
 import ntpath
+import os
 import time
-from . import util
-from . import html
+
+import numpy as np
+
+from . import html, util
 
 
 class Visualizer():
@@ -24,10 +25,12 @@ class Visualizer():
             self.img_dir = os.path.join(self.web_dir, 'images')
             print('create web directory %s...' % self.web_dir)
             util.mkdirs([self.web_dir, self.img_dir])
-        self.log_name = os.path.join(opt.checkpoints_dir, opt.name, 'loss_log.txt')
+        self.log_name = os.path.join(
+            opt.checkpoints_dir, opt.name, 'loss_log.txt')
         with open(self.log_name, "a") as log_file:
             now = time.strftime("%c")
-            log_file.write('================ Training Loss (%s) ================\n' % now)
+            log_file.write(
+                '================ Training Loss (%s) ================\n' % now)
 
     def reset(self):
         self.saved = False
@@ -45,7 +48,7 @@ class Visualizer():
                 title = self.name
                 label_html = ''
                 label_html_row = ''
-                nrows = int(np.ceil(len(visuals.items()) / ncols))
+                # nrows = int(np.ceil(len(visuals.items()) / ncols))
                 images = []
                 idx = 0
                 for label, image_numpy in visuals.items():
@@ -55,7 +58,8 @@ class Visualizer():
                     if idx % ncols == 0:
                         label_html += '<tr>%s</tr>' % label_html_row
                         label_html_row = ''
-                white_image = np.ones_like(image_numpy.transpose([2, 0, 1]))*255
+                white_image = np.ones_like(
+                    image_numpy.transpose([2, 0, 1]))*255
                 while idx % ncols != 0:
                     images.append(white_image)
                     label_html_row += '<td></td>'
@@ -75,13 +79,16 @@ class Visualizer():
                                    win=self.display_id + idx)
                     idx += 1
 
-        if self.use_html and (save_result or not self.saved):  # save images to a html file
+        # save images to a html file
+        if self.use_html and (save_result or not self.saved):
             self.saved = True
             for label, image_numpy in visuals.items():
-                img_path = os.path.join(self.img_dir, 'epoch%.3d_%s.png' % (epoch, label))
+                img_path = os.path.join(
+                    self.img_dir, 'epoch%.3d_%s.png' % (epoch, label))
                 util.save_image(image_numpy, img_path)
             # update website
-            webpage = html.HTML(self.web_dir, 'Experiment name = %s' % self.name, reflesh=1)
+            webpage = html.HTML(
+                self.web_dir, 'Experiment name = %s' % self.name, reflesh=1)
             for n in range(epoch, 0, -1):
                 webpage.add_header('epoch [%d]' % n)
                 ims = []
@@ -101,9 +108,11 @@ class Visualizer():
         if not hasattr(self, 'plot_data'):
             self.plot_data = {'X': [], 'Y': [], 'legend': list(errors.keys())}
         self.plot_data['X'].append(epoch + counter_ratio)
-        self.plot_data['Y'].append([errors[k] for k in self.plot_data['legend']])
+        self.plot_data['Y'].append([errors[k]
+                                    for k in self.plot_data['legend']])
         self.vis.line(
-            X=np.stack([np.array(self.plot_data['X'])] * len(self.plot_data['legend']), 1),
+            X=np.stack([np.array(self.plot_data['X'])] *
+                       len(self.plot_data['legend']), 1),
             Y=np.array(self.plot_data['Y']),
             opts={
                 'title': self.name + ' loss over time',

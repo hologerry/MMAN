@@ -24,15 +24,15 @@ Download [The LIP Dataset]( https://drive.google.com/open?id=1SlvucF37ApWCQjmdCY
 The folder is structured as follows:
 ```
 ├── MMAN/
-    ├── data/                 	/* Files for data processing  	*/
-    ├── model/                 	/* Files for model    			*/
-    ├── options/          	    /* Files for options    		*/
-    ├── ...			            /* Other dirs & files 			*/
+    ├── data/                   /* Files for data processing    */
+    ├── model/                  /* Files for model              */
+    ├── options/                /* Files for options            */
+    ├── ...                     /* Other dirs & files           */
     |── Human/
-    	├── train_LIP_A/		/* Training set: RGB images		*/
-    	├── train_LIP_B/		/* Training set: GT labels		*/
-    	├── test_LIP_A/		    /* Testing set: RGB images		*/
-    	└── test_LIP_B/		    /* Testing set: GT labels		*/
+    	├── train_LIP_A/        /* Training set: RGB images     */
+    	├── train_LIP_B/        /* Training set: GT labels      */
+    	├── test_LIP_A/         /* Testing set: RGB images      */
+    	└── test_LIP_B/         /* Testing set: GT labels       */
 ```
 
 
@@ -68,7 +68,7 @@ Enjoy the training process in http://XXX.XXX.XXX.XXX:8097/ , where XXX is your s
 ## Test
 ### Use trained model to parse human images
 ```bash
-python test.py --dataroot ../Human --dataset LIP --name Exp_0 --gpu_ids 0 --which_epoch 30 --how_many 10000 --output_nc 20 --loadSize 256
+python test.py --dataroot Human --dataset LIP --name Exp_0 --gpu_ids 0 --which_epoch 30 --how_many 10000 --output_nc 20 --loadSize 256
 ```
 `--dataroot` The root of the testing set.
 

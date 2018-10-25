@@ -20,6 +20,8 @@ for epoch in range(opt.epoch_count, opt.niter + opt.niter_decay + 1):
     epoch_iter = 0
 
     for i, data in enumerate(dataset):
+        if i == 0:
+            print(data.keys())
         iter_start_time = time.time()
         visualizer.reset()
         total_steps += opt.batchSize

@@ -122,6 +122,7 @@ class AlignedDataset(BaseDataset):
                         int(self.opt.loadSize * 0.75)), Image.LANCZOS)
         A_L = A.resize((int(self.opt.loadSize * 1.25),
                         int(self.opt.loadSize * 1.25)), Image.LANCZOS)
+        # 16*16
         A_attribute = A.resize(
             (int(self.opt.fineSize/16), int(self.opt.fineSize/16)), Image.LANCZOS)
 
@@ -178,6 +179,7 @@ class AlignedDataset(BaseDataset):
         A_attribute = self.transform(A_attribute)
 
         B_L1 = channel_1to1(B)  # single channel long tensor
+        # 16*16
         B_attribute_L1 = B.resize(
             (int(self.opt.fineSize/16), int(self.opt.fineSize/16)), Image.NEAREST)
         B = channel_1toN(B, self.opt.output_nc)  # multi channel float tensor
@@ -216,6 +218,15 @@ class AlignedDataset(BaseDataset):
                 B_L1 = swap_1(B_L1, 14, 15)
                 B_L1 = swap_1(B_L1, 16, 17)
                 B_L1 = swap_1(B_L1, 18, 19)
+
+        # A size torch.Size([3, 256, 256])
+        # A_S size torch.Size([3, 256, 256])
+        # A_L size torch.Size([3, 256, 256])
+        # B_L1 torch.Size([256, 256])
+        # B_GAN torch.Size([20, 256, 256])
+        # A_attr torch.Size([3, 16, 16])
+        # B_attr_L1 torch.Size([16, 16])
+        # B_attr_GAN torch.Size([20, 16, 16])
 
         return {'A': A, 'A_S': A_S, 'A_L': A_L, 'B_L1': B_L1, 'B_GAN': B,
                 'A_Attribute': A_attribute,
